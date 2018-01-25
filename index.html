@@ -1,0 +1,333 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Build robots using Go</h2>
+					Johannes Engelke, 2018
+
+					<aside class="notes">
+						Before we start:
+						<ul>
+							<li>Who knows go?</li>
+							<li>Who is fulltime go developer?</li>
+							<li>Who does not know much about go?</li>
+							<li>Who is here because it is about robots?</li>
+						</ul>
+						What can you expect by todays talk?
+						<ul>
+							<ol>Why go is a natural fit for IoT</ol>
+							<ol>Cocurrency</ol>
+							<ol>Gobot.io library</ol>
+							<ol>Play with it</ol>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Who am I?</h2>
+					<div style="text-align: left; float: left;">
+						<ul>
+							<li>Product Owner Serverless @ SAP Hybris</li>
+							<li>Go developer</li>
+							<li>Robot enthusiast</li>
+						</ul>
+ 					</div>
+
+				 <div style="text-align: right; float: right;">
+					 <!-- TODO: Add image //-->
+				 </div>
+
+				</section>
+				<section>
+					<h2>The go programming language</h2>
+					<aside class="notes">
+						<ul>
+							<li>Announced in November 2009</li>
+							<li>Google released Go 1.0 in March 2012</li>
+							<li>Experiment by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson</li>
+							<li>Resolve common criticisms of other languages while maintaining their positive characteristics</li>
+							<li>Design principles</li>
+							<li>
+								<ul>
+									<li>Statically typed</li>
+									<li>Compiled language</li>
+									<li>scalable to large systems</li>
+									<li>Productive and readable, without too many mandatory keywords and repetition</li>
+									<li>Not requiring integrated development environments</li>
+									<li>Supporting networking and multiprocessing</li>
+								</ul>
+							</li>
+							<li>Shared dislike of C++'s complexity as a primary motivation for designing a new language</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Concurrency vs. parallelism</h2>
+					<blockquote cite="https://talks.golang.org/2012/waza.slide#8">
+						Concurrency provides a <span class="fragment highlight-red">way to structure</span> a solution to solve a problem that may (but not necessarily) be parallelizable.
+					</blockquote>
+					<small>https://talks.golang.org/2012/waza.slide#8</small>
+					<aside class="notes">
+						<ul>
+							<li>Talk about structure</li>
+							<li>Cost of a go routine</li>
+							<li>IoT Usecases</li>
+					</aside>
+				</section>
+				<section>
+					<h2>IoT and Go</h2>
+					<ul>
+						<li>Concourrency</li>
+						<li>Many Hardware Platforms</li>
+						<li>Integration with C</li>
+						<li>Efficency</li>
+					</ul>
+				</section>
+				<section>
+					<section data-background-iframe="https://gobot.io/">
+						<aside class="notes">
+							<ul>
+								<li>As we figured out, golang might be a good fit.</li>
+								<li>Lets jump right into gobot.io</li>
+								<li>A framework for everything we love (robots, drones, Death Stars...)</li>
+								<li>Leveraging the langugage features of golang</li>
+								<li>
+									<ul>
+										<li>Concurrency</li>
+										<li>Multi Platform support</li>
+										<li>Performance</li>
+										<li>Nice gophers</li>
+									</ul>
+								</li>
+								<li>Support of 32 Platforms</li>
+								<li>Plenty drives</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Classic Gobot</h2>
+						<img src="images/classic-gobot.jpg" width="40%"/>
+					</section>
+					<section>
+						<h2>Master Gobot</h2>
+						<img src="images/master-gobot.jpg" width="40%"/>
+					</section>
+					<section>
+						<h2>Metal Gobot</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Hello World!</h2>
+						<img src="images/01-led.png" alt="LED Attached to arduino" height="500px"/>
+					</section>
+					<section>
+						<h2>Hello World!</h2>
+
+
+							<pre><code data-trim data-noescape>
+								func main() {
+								        adaptor := firmata.NewAdaptor("/dev/cu.usbmodem146671")
+								        led := gpio.NewLedDriver(adaptor, "13")
+								        work := func() {
+								                gobot.Every(1*time.Second, func() {
+								                        led.Toggle()})
+								        }
+								        robot := gobot.NewRobot("bot",
+								                []gobot.Connection{adaptor},
+								                []gobot.Device{led},
+								                work,
+								        )
+								        robot.Start()
+								}
+							</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>Hello World of IoT</li>
+								<li>The wiring</li>
+								<li>Setup an adaptor</li>
+								<li>Setup a LED Driver</li>
+								<li>Toggle the LED every second</li>
+								<li>Push Driver on Arduino (gort.io)</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<img src="http://localhost:3123/" width="80%"/>
+						<aside class="notes">
+							<ul>
+								<li>gort scan serial</li>
+								<li>gort arduino upload firmata /dev/cu.usbmodem146671 -b uno</li>
+								<li>go run</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Firmata</h2>
+						<aside class="notes">
+							<ul>
+								<li>Golang can not run on simple micro controllers</li>
+								<li>The Gobot propgramm is running on the Host PC</li>
+								<li>On the Target System (e.g. an Arduino) is running a firmata firmware</li>
+								<li>Firmata is working for serial connections. E.g USB, BLE / Bluetooth and TCP</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Hello Raspberry</h2>
+						<pre><code data-trim data-noescape>
+							...
+							// 	adaptor := firmata.NewAdaptor("/dev/cu.usbmodem146671")
+							adaptor := raspi.NewAdaptor()
+							led := gpio.NewLedDriver(adaptor, "13")
+							...
+						</code></pre>
+						<pre><code data-trim data-noescape>
+							$ GOARM=6 GOARCH=arm GOOS=linux go build main.go
+						</code></pre>
+					</section>
+					<section>
+						<img src="http://localhost:3123/" width="80%"/>
+						<aside class="notes">
+							<ul>
+								<li>Cross-compile</li>
+								<li>scp to PI</li>
+								<li>Run it</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Button and Events</h2>
+						<img src="images/02-button.png" alt="LED and Button Attached to arduino" height="500px"/>
+					</section>
+					<section>
+						<h2>Button and events</h2>
+						<pre><code data-trim data-noescape>
+							adaptor := firmata.NewAdaptor("/dev/cu.usbmodem146621")
+							led := gpio.NewLedDriver(adaptor, "13")
+							<mark>button := gpio.NewButtonDriver(adaptor, "12")</mark>
+
+							work := func() {
+								<mark>button.On(gpio.ButtonPush, func(data interface{}) {
+									led.On()
+								})
+
+								button.On(gpio.ButtonRelease, func(data interface{}) {
+									led.Off()
+								})</mark>
+							}
+
+							robot := gobot.NewRobot("bot",
+								[]gobot.Connection{adaptor},
+								[]gobot.Device{led, <mark>button</mark>},
+								work,
+							)
+						</code></pre>
+					</section>
+					<section>
+						<img src="http://localhost:3123/" width="80%"/>
+					</section>
+				</section>
+				<!-- <section>
+					<section>
+						<h2>Servo</h2>
+						<img src="images/03-servo.png" alt="Connected Servo" height="500px" />
+					</section>
+					<section>
+					<h2>Servo</h2>
+					<pre><code data-trim data-noescape>
+						func main() {
+							adaptor := firmata.NewAdaptor("/dev/cu.usbmodem146621")
+							servo := gpio.NewServoDriver(firmataAdaptor, "3")
+
+							work := func() {
+								gobot.Every(1*time.Second, func() {
+									i :=
+									servo.Move(uint8(gobot.Rand(180)))
+								})
+							}
+
+							robot := gobot.NewRobot("bot",
+								[]gobot.Connection{adaptor},
+								[]gobot.Device{servo},
+								work,
+							)
+
+							robot.Start()
+						}
+					</code></pre>
+				</section>
+					<section>
+						<img src="http://localhost:3123/" width="80%"/>
+					</section>
+				</section> -->
+				<section>
+					<section>
+						<img src="images/project.jpg" width="50%"/>
+					</section>
+					<section>
+						<img src="http://localhost:3123/" width="80%"/>
+						<aside class="notes">
+							<ul>
+								<li>The Shop (Each order is sending a NATS message)</li>
+								<li>YSF Bot (Nats message is received by our YSF  Bot)</li>
+								<li>The the Pick and Package place is illuminated using Arduino</li>
+								<li>If the bottle is picked, status is updated (using arduino)</li>
+								<li>If it is placed into the delivery bot status is updated again (using NATS messages send by the beer bot)</li>
+								<li>If the bottle is picked up again Status is updatded and firework using firmata via tcp</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h1>Thank you</h1>
+					@quablab<br/> johannes.engelke@sap.com<br/> github.com/joek
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

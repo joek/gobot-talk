@@ -61,50 +61,73 @@
 
 				</section>
 				<section>
-					<h2>The go programming language</h2>
-					<aside class="notes">
+					<section>
+						<h2>The go programming language</h2>
 						<ul>
-							<li>Announced in November 2009</li>
-							<li>Google released Go 1.0 in March 2012</li>
-							<li>Experiment by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson</li>
-							<li>Resolve common criticisms of other languages while maintaining their positive characteristics</li>
-							<li>Design principles</li>
-							<li>
-								<ul>
-									<li>Statically typed</li>
-									<li>Compiled language</li>
-									<li>scalable to large systems</li>
-									<li>Productive and readable, without too many mandatory keywords and repetition</li>
-									<li>Not requiring integrated development environments</li>
-									<li>Supporting networking and multiprocessing</li>
-								</ul>
-							</li>
-							<li>Shared dislike of C++'s complexity as a primary motivation for designing a new language</li>
+							<li class="fragment">Announced in November 2009</li>
+							<li class="fragment">Google released Go 1.0 in March 2012</li>
+							<li class="fragment">Experiment by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson</li>
 						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<h2>Concurrency vs. parallelism</h2>
-					<blockquote cite="https://talks.golang.org/2012/waza.slide#8">
-						Concurrency provides a <span class="fragment highlight-red">way to structure</span> a solution to solve a problem that may (but not necessarily) be parallelizable.
-					</blockquote>
-					<small>https://talks.golang.org/2012/waza.slide#8</small>
-					<aside class="notes">
+						<aside class="notes">
+							<ul>
+								<li>Shared dislike of C++'s complexity as a primary motivation for designing a new language</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h2>Design principles</h2>
 						<ul>
-							<li>Talk about structure</li>
-							<li>Cost of a go routine</li>
-							<li>IoT Usecases</li>
-					</aside>
+							<li class="fragment">Statically typed</li>
+							<li class="fragment">Compiled language</li>
+							<li class="fragment">Scalable to large systems</li>
+							<li class="fragment">Productive and readable, without too many mandatory keywords and repetition</li>
+							<li class="fragment">Not requiring integrated development environments</li>
+							<li class="fragment">Supporting networking and multiprocessing</li>
+						</ul>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Concurrency vs. parallelism</h2>
+						<blockquote cite="https://talks.golang.org/2012/waza.slide#8">
+							Concurrency provides a <span class="fragment highlight-red">way to structure</span> a solution to solve a problem that may (but not necessarily) be parallelizable.
+						</blockquote>
+						<small>https://talks.golang.org/2012/waza.slide#8</small>
+						<aside class="notes">
+							<ul>
+								<li>Talk about structure</li>
+								<li>Cost of a go routine</li>
+								<li>IoT Usecases</li>
+						</aside>
+					</section>
+					<section>
+						<h2>Go Routines</h2>
+						<!-- TODO: Add Image about Go Routines -->
+					</section>
 				</section>
 				<section>
-					<h2>IoT and Go</h2>
-					<ul>
-						<li>Concourrency</li>
-						<li>Many Hardware Platforms</li>
-						<li>Integration with C</li>
-						<li>Efficency</li>
-					</ul>
+					<section>
+						<h2>IoT Specific Problems</h2>
+						<ul>
+							<li>Limited Hardware</li>
+							<li>Many different Platforms</li>
+							<li>Concurrency</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Golang</h2>
+						<ul>
+							<li>Many Hardware Platforms</li>
+							<li>Integration with C</li>
+							<li>Efficency</li>
+							<li>Concourrency</li>
+						</ul>
+					</section>
+					<section>
+						<img src="images/kuka.png"/><br/>
+						<a href="https://github.com/hybridgroup/gobot/issues/422">https://github.com/hybridgroup/gobot/issues/422</a>
+					</section>
 				</section>
 				<section>
 					<section data-background-iframe="https://gobot.io/">
@@ -255,7 +278,7 @@
 						<img src="http://localhost:3123/" width="80%"/>
 					</section>
 				</section>
-				<!-- <section>
+				<section>
 					<section>
 						<h2>Servo</h2>
 						<img src="images/03-servo.png" alt="Connected Servo" height="500px" />
@@ -287,7 +310,7 @@
 					<section>
 						<img src="http://localhost:3123/" width="80%"/>
 					</section>
-				</section> -->
+				</section>
 				<section>
 					<section>
 						<img src="images/project.jpg" width="50%"/>

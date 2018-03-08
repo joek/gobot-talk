@@ -1,0 +1,11 @@
+Agenda:
+- First steps with SAP Cloud Functions
+    -> Event Driven
+- Frist steps with YSF (& Kubeless)
+    -> Istio
+
+
+SAP CLoud Functions and SAP Hybris Service Factory are two projects implementing Function as a Services Solutions inside SAP. Both solutions are based on Kubeless, an Kubernetes Native Framework. In this talk, we would like to share how to get started with each of them and how they could improve your Product. We will demo the development of a function and how they are connected to events or exposed via http.
+
+TODO:
+- Istio jwt token

@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// adaptor := firmata.NewAdaptor("/dev/cu.usbmodem14411")
+	// adaptor := firmata.NewAdaptor("/dev/tty.usbmodem14131")
 	adaptor := raspi.NewAdaptor()
 	led := gpio.NewLedDriver(adaptor, "13")
 

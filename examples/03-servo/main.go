@@ -10,8 +10,8 @@ import (
 )
 
 func main() {
-	adaptor := firmata.NewAdaptor("/dev/cu.usbmodem146621")
-	servo := gpio.NewServoDriver(firmataAdaptor, "3")
+	adaptor := firmata.NewAdaptor("/dev/tty.usbmodem14131")
+	servo := gpio.NewServoDriver(adaptor, "10")
 
 	work := func() {
 		gobot.Every(1*time.Second, func() {
